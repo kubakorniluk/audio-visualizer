@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+
+:root {
+  /* COLORS */
+  --black: rgba(10, 11, 12, 1);
+  --black-300: rgba(10, 11, 12, .300);
+  --black-600: rgba(10, 11, 12, .600);
+  --light-black: rgba(26, 27, 28, 1);
+  --dark-blue: rgba(10, 11, 28, 1);
+  --dark-blue-150: rgba(10, 11, 28, .150);
+  --dark-blue-300: rgba(10, 11, 28, .300);
+  --dark-blue-600: rgba(10, 11, 28, .600);
+  --dark-purple: rgba(25, 22, 65, 1);
+  --dark-purple-150: rgba(25, 22, 65, .150);
+  --dark-purple-600: rgba(25, 22, 65, .600);
+  --light-purple: rgba(45, 38, 115, 1);
+  --purple: rgba(88, 76, 234, 1);
+  --slategray: rgba(112, 128, 144, 1);
+  --white: rgb(221, 221, 221);
+  /* FONTS */
+  --poppins: 'Poppins', sans-serif;
+  --p-400-09: 400 0.9rem 'Poppins', sans-serif;
+  --p-500-09: 500 0.9rem 'Poppins', sans-serif;
+  --p-600-09: 600 0.9rem 'Poppins', sans-serif;
+  --p-400-12: 400 1.2rem 'Poppins', sans-serif;
+  --p-500-12: 500 1.2rem 'Poppins', sans-serif;
+  --p-600-12: 600 1.2rem 'Poppins', sans-serif;
+}
+
+.mp-0 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg, 
+    var(--black) 0%, 
+    var(--dark-blue) 20%, 
+    var(--dark-purple) 45%, 
+    var(--light-purple) 75%, 
+    rgba(65, 52, 165, 1) 100%
+  );
+  background-attachment: fixed;
+}
+/* *::-webkit-scrollbar {
+  scrollbar-width: thin;
+}
+ 
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgb(10, 11, 28, .6);
+}
+ 
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(25, 22, 65);
+  border-radius: 8px;
+} */
+@supports (scrollbar-color: auto) {
+  * {
+    scrollbar-color: var(--purple) rgba(10, 11, 28, .5);
+  }
+  
+}
+
+/* Otherwise, use `::-webkit-scrollbar-*` pseudo-elements */
+@supports selector(::-webkit-scrollbar) {
+  *::-webkit-scrollbar {
+    background: rgb(88, 76, 234);
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(10, 11, 28, .5);
+  }
+}
