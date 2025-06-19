@@ -1,67 +1,59 @@
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
-import { useTracksStore } from '@/stores/tracks';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { 
-    faForwardStep, 
-    faBackwardStep, 
-    faPlay, 
-    faPause, 
-    faCircle,
-    faVolumeXmark,
-    faVolumeOff,
-    faVolumeLow,
-    faVolumeHigh 
-} from '@fortawesome/free-solid-svg-icons';
-import Visualizer from './Visualizer.vue';
+    import { ref, computed, watch, onMounted } from 'vue';
+    import { useTracksStore } from '@/stores/tracks';
+    import { library } from '@fortawesome/fontawesome-svg-core';
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import { 
+        faForwardStep, 
+        faBackwardStep, 
+        faPlay, 
+        faPause, 
+        faCircle,
+        faVolumeXmark,
+        faVolumeOff,
+        faVolumeLow,
+        faVolumeHigh 
+    } from '@fortawesome/free-solid-svg-icons';
+    import Visualizer from './Visualizer.vue';
 
-library.add(
-    faForwardStep, 
-    faBackwardStep, 
-    faPlay, 
-    faPause, 
-    faCircle,
-    faVolumeXmark,
-    faVolumeOff,
-    faVolumeLow,
-    faVolumeHigh 
-);
+    library.add(
+        faForwardStep, 
+        faBackwardStep, 
+        faPlay, 
+        faPause, 
+        faCircle,
+        faVolumeXmark,
+        faVolumeOff,
+        faVolumeLow,
+        faVolumeHigh 
+    );
 
-const store = useTracksStore();
+    const store = useTracksStore();
 
-const time = ref('0:00');
+    const time = ref('0:00');
 
-// Reaktywny pasek postępu
-const progress = computed(() => {
-    const track = store.getCurrentTrack;
-    if (track && track.duration.total > 0) {
-        return (track.currentTime.total / track.duration.total) * 100;
-    }
-    return 0;
-});
+    // Reaktywny pasek postępu
+    const progress = computed(() => {
+        const track = store.getCurrentTrack;
+        if (track && track.duration.total > 0) {
+            return (track.currentTime.total / track.duration.total) * 100;
+        }
+        return 0;
+    });
 
-const checkIsPlaying = () => {
-    if (store.getCurrentTrack && store.getCurrentTrack.id !== undefined) {
-        return store.isPlaying(store.getCurrentTrack.id);
-    }
-}
-
-const checkDuration = () => {
-    if (store.getCurrentTrack ) {
-        return `${store.getCurrentTrack.duration.minutes}:${store.getCurrentTrack.duration.seconds < 10 ? '0' + store.getCurrentTrack.duration.seconds : store.getCurrentTrack.duration.seconds}`;
-    } else { return '0:00' }
-}
-
-// Aktualizuj czas odtwarzania na bieżąco
-watch(
-    () => store.getCurrentTrack && store.getCurrentTrack.currentTime.total,
-    (newTime) => {
-        if (store.getCurrentTrack) {
-            time.value = `${store.getCurrentTrack.currentTime.minutes}:${store.getCurrentTrack.currentTime.seconds < 10 ? '0' + store.getCurrentTrack.currentTime.seconds : store.getCurrentTrack.currentTime.seconds}`;
+    const checkIsPlaying = () => {
+        if (store.getCurrentTrack && store.getCurrentTrack.id !== undefined) {
+            return store.isPlaying(store.getCurrentTrack.id);
         }
     }
-);
+
+    const checkDuration = () => {
+        if (store.getCurrentTrack ) {
+            return `${store.getCurrentTrack.duration.minutes}:${store.getCurrentTrack.duration.seconds < 10 ? '0' + store.getCurrentTrack.duration.seconds : store.getCurrentTrack.duration.seconds}`;
+        } else { return '0:00' }
+    }
+
+
 
 </script>
 
@@ -107,6 +99,7 @@ watch(
 
 <style scoped>
     .player {
+
         position: absolute;
         bottom: 0;
         left: 0;

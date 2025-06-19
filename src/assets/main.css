@@ -15,7 +15,13 @@
   --dark-purple-150: rgba(25, 22, 65, .150);
   --dark-purple-600: rgba(25, 22, 65, .600);
   --light-purple: rgba(45, 38, 115, 1);
+  --light-purple-150: rgba(45, 38, 115, .150);
+  --light-purple-300: rgba(45, 38, 115, .300);
+  --light-purple-600: rgba(45, 38, 115, .600);
   --purple: rgba(88, 76, 234, 1);
+  --purple-150: rgba(88, 76, 234, .150);
+  --purple-300: rgba(88, 76, 234, .300);
+  --purple-600: rgba(88, 76, 234, .600);
   --slategray: rgba(112, 128, 144, 1);
   --white: rgb(221, 221, 221);
   /* FONTS */

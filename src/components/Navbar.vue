@@ -10,7 +10,6 @@
     import { 
         faGithub, 
         faLinkedin, 
-        faSoundcloud, 
         faYoutube
     } from '@fortawesome/free-brands-svg-icons'
     import { library } from '@fortawesome/fontawesome-svg-core'; 

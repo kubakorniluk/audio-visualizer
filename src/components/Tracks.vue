@@ -1,4 +1,5 @@
 <script setup>
+    import LoadMore from './LoadMore.vue';
     import { useTracksStore } from '@/stores/tracks';
     import { library } from '@fortawesome/fontawesome-svg-core';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -66,6 +67,7 @@
                 </button>
             </div>
         </li>
+        <LoadMore></LoadMore>
     </ul>
 
 </template>

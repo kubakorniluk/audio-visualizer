@@ -57,7 +57,7 @@ export const useTracksStore = defineStore('tracks', () => {
       });
 
       // update track position
-      audio.addEventListener("timeupdate", () => {
+      audio.addEventListener("timeupdate", (event) => {
         let time = audio.currentTime;
         let minutes = Math.floor(time / 60);
         let seconds = Math.floor(time % 60);
@@ -78,6 +78,8 @@ export const useTracksStore = defineStore('tracks', () => {
       }
 
       tracks.value.push(track);
+      // ...w funkcji setTracks, po tracks.value.push(track);
+console.log(`Załadowano: ${track.name}`, track);
       
     }
 
@@ -130,42 +132,68 @@ export const useTracksStore = defineStore('tracks', () => {
   const isPlaying = (id) => tracks.value[id].isPlaying;
 
   const togglePlay = (id) => {
+    
+  const track = tracks.value.find(t => t.id === id);
+  if (!track) return;
+
+  // Jeśli kliknięty track już gra, zatrzymaj go
+  if (track.isPlaying) {
+    track.audio.pause();
+    track.isPlaying = false;
+  } else {
+    // Zatrzymaj wszystkie inne
+    tracks.value.forEach(t => {
+      if (t.id !== id) {
+        t.audio.pause();
+        t.isPlaying = false;
+      }
+    });
+    // Odtwórz wybrany
+    track.audio.play();
+    track.isPlaying = true;
+    currentTrack.value = track;
+  }
+
     // const audio = [...document.getElementsByTagName('audio')];
-    // const currentAudio = audio.find(audio => audio.id == id);
+    // // const audio = currentTrack.value.audio;
     // console.log(audio)
+    // const currentAudio = audio.find(audio => audio.id == id);
+    // // console.log(audio)
     // setCurrentTrack(id);
     // if (isPlaying(id)) {
-    //     // console.log(currentAudio)
-    //     play();
-    //     tracks.value.forEach(track => {
-    //         if (track.id != id) {
-    //             track.audio.pause();
-    //         }
-    //     });
+    //   play();
+    //     console.log(currentAudio)
+    //   tracks.value.forEach(track => {
+    //       if (track.id != id) {
+    //           track.audio.pause();
+    //       }
+            
+    //   });
     // } else {
     //     pause();
     // }
-     tracks.value.forEach(track => {
-    if (track.id === id) {
-      if (!track.isPlaying) {
-        track.audio.play();
-        track.isPlaying = true;
-      } else {
-        track.audio.pause();
-        track.isPlaying = false;
-      }
-    } else {
-      track.audio.pause();
-      track.isPlaying = false;
-    }
-  });
-  currentTrack.value = tracks.value.find(track => track.id === id);
+    // //  tracks.value.forEach(track => {
+    // //   if (track.id === id) {
+    // //     if (!track.isPlaying) {
+    // //       track.audio.play();
+    // //       track.isPlaying = true;
+    // //     } else {
+    // //       track.audio.pause();
+    // //       track.isPlaying = false;
+    // //     }
+    // //   } else {
+    // //     track.audio.pause();
+    // //     track.isPlaying = false;
+    // //   }
+    // // });
+    // currentTrack.value = tracks.value.find(track => track.id === id);
   }
   const nextTrack = () => {
     let id = currentTrack.value.id + 1;
     if (id >= tracks.value.length) {
       id = 0;
     }
+    setCurrentTrack(id);
     console.log(currentTrack.value.id)
     togglePlay(id);
   }
@@ -174,7 +202,7 @@ export const useTracksStore = defineStore('tracks', () => {
     if (id < 0) {
       id = tracks.value.length - 1;
     }
-    // setCurrentTrack(id);
+    setCurrentTrack(id);
     console.log(currentTrack.value.id)
     togglePlay(id);
   }
